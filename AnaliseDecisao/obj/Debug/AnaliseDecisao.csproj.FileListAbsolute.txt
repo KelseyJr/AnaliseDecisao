@@ -1,0 +1,12 @@
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\bin\Debug\AnaliseDecisao.exe.config
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\bin\Debug\AnaliseDecisao.exe
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\bin\Debug\AnaliseDecisao.pdb
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao.csprojAssemblyReference.cache
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao3.frmParametrizacao.resources
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao3.Properties.Resources.resources
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao.csproj.GenerateResource.cache
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao.csproj.CoreCompileInputs.cache
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao.exe
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao.pdb
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao3.View.frmAnaliseDecisao.resources
+C:\Users\Kelsey\source\repos\AnaliseDecisao\AnaliseDecisao\obj\Debug\AnaliseDecisao3.View.frmPorcentagemAnaliseDecisao.resources

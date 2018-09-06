@@ -1,0 +1,10 @@
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\bin\Debug\AnaliseDecisao3.exe.config
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\bin\Debug\AnaliseDecisao3.exe
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\bin\Debug\AnaliseDecisao3.pdb
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\obj\Debug\AnaliseDecisao3.csprojAssemblyReference.cache
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\obj\Debug\AnaliseDecisao3.frmParametrizacao.resources
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\obj\Debug\AnaliseDecisao3.Properties.Resources.resources
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\obj\Debug\AnaliseDecisao3.csproj.GenerateResource.cache
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\obj\Debug\AnaliseDecisao3.csproj.CoreCompileInputs.cache
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\obj\Debug\AnaliseDecisao3.exe
+C:\Users\Kelsey\AppData\Local\Temporary Projects\AnaliseDecisao3\obj\Debug\AnaliseDecisao3.pdb
