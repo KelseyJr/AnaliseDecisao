@@ -52,7 +52,15 @@ namespace AnaliseDecisao3 {
         private void RedirecionarFrmAnaliseDecisao() {
             int Colunas = Convert.ToInt32(txtCenario.Text);
             int Linhas = Convert.ToInt32(txtInvestimentos.Text);
-            frmAnaliseDecisao frmAnaliseDecisao = new frmAnaliseDecisao(Colunas, Linhas);
+            int AnaliseDecisao;
+            if (rdbIncerteza.Checked) {
+                AnaliseDecisao = 1;
+            } else if (rdbRisco.Checked) {
+                AnaliseDecisao = 2;
+            } else {
+                AnaliseDecisao = 3;
+            }
+            frmAnaliseDecisao frmAnaliseDecisao = new frmAnaliseDecisao(Colunas, Linhas, AnaliseDecisao);
             frmAnaliseDecisao.ShowDialog();
         }
 

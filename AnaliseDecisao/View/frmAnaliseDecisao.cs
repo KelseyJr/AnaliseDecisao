@@ -14,13 +14,15 @@ namespace AnaliseDecisao3.View {
 
         int QuantidadeColunas;
         int QuantidadeLinhas;
+        int MetodoAnalise;
         decimal[] Porcentagem;
         int[] InvestimentoIncerteza;
         decimal[] MenorArrependimentoIncerteza;
         decimal[] MenorArrependimentoRisco;
 
-        public frmAnaliseDecisao(int Colunas, int Linhas){
+        public frmAnaliseDecisao(int Colunas, int Linhas, int analise){
             InitializeComponent();
+            MetodoAnalise = analise;
             QuantidadeColunas = Colunas;
             QuantidadeLinhas = Linhas;
             MenorArrependimentoIncerteza = new decimal[Linhas];
@@ -40,7 +42,7 @@ namespace AnaliseDecisao3.View {
 
             PreencherColunas(QuantidadeColunas);
             PreencherLinhas(QuantidadeLinhas);
-            AjustarPesoELarguraGridInvestimentoCenario();
+
 
             dgvInvestimentoCenario.Columns[0].ReadOnly = true;
             dgvInvestimentoCenario.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -60,28 +62,24 @@ namespace AnaliseDecisao3.View {
 
             lblMaxVME.Text = "";
             lblVEIP.Text = "";
+
+            if (MetodoAnalise == 1) {
+                btnAnaliseRisco.Visible = false;
+            } else if(MetodoAnalise == 2) {
+                btnAnaliseIncerteza.Visible = false;
+            }
+            pnlAnaliseRisco.Visible = false;
+            pnlAnaliseIncerteza.Visible = false;
+            AjustarGrids(104, 640, dgvPerdaEsperadaPonderada);
+            AjustarGrids(104, 640, dgvIncerteza);
+            AjustarGrids(104, 640, dgvIncertezaArrependimento);
+            AjustarGrids(87, 640, dgvVMERisco);
+            AjustarGrids(142, 672, dgvInvestimentoCenario);
+
         }
 
 
         #region "Grid Principal"
-
-        private void AjustarPesoELarguraGridInvestimentoCenario() {
-            int LarguraTotal = dgvInvestimentoCenario.RowHeadersWidth;
-            int PesoTotal = dgvInvestimentoCenario.ColumnHeadersHeight;
-
-            foreach (DataGridViewColumn Linha in dgvInvestimentoCenario.Columns) {
-                LarguraTotal += Linha.Width;
-            }
-
-            foreach (DataGridViewRow Linha in dgvInvestimentoCenario.Rows) {
-                PesoTotal += Linha.Height;
-            }
-
-            LarguraTotal = LarguraTotal > 744 ? LarguraTotal = 744 : LarguraTotal;
-            PesoTotal = PesoTotal > 142 ? PesoTotal = 142 : PesoTotal;
-
-            dgvInvestimentoCenario.ClientSize = new Size(LarguraTotal + 2, PesoTotal + 2);
-        }
 
         private void dgvInvestimentoCenario_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) {
             decimal TotalPorcentagem = Porcentagem.Sum();
@@ -211,10 +209,6 @@ namespace AnaliseDecisao3.View {
 
 
         #endregion
-
-
-
-
 
 
         #region "Risco"
@@ -389,6 +383,24 @@ namespace AnaliseDecisao3.View {
             }
         }
 
+        private void AjustarGrids(int pesoIdeal, int larguraIdeal, DataGridView tabela) {
+            int LarguraTotal = tabela.RowHeadersWidth;
+            int PesoTotal = tabela.ColumnHeadersHeight;
+
+            foreach (DataGridViewColumn Linha in tabela.Columns) {
+                LarguraTotal += Linha.Width;
+            }
+
+            foreach (DataGridViewRow Linha in tabela.Rows) {
+                PesoTotal += Linha.Height;
+            }
+
+            LarguraTotal = LarguraTotal > larguraIdeal ? LarguraTotal = larguraIdeal : LarguraTotal;
+            PesoTotal = PesoTotal > pesoIdeal ? PesoTotal = pesoIdeal : PesoTotal;
+
+            tabela.ClientSize = new Size(LarguraTotal +2 , PesoTotal+2);
+        }
+
         #endregion
 
         private void ExecutaFuncoes() {
@@ -398,27 +410,32 @@ namespace AnaliseDecisao3.View {
             ZerarArrays();
 
             // Métodos Relacionados a Análise de Incerteza
-            CalcularValoresTabelaIncerteza(ArrayValores);
-            AlterarArrependimentoIncerteza(ArrayValores);
+            if (MetodoAnalise == 1 || MetodoAnalise == 3) {
+                CalcularValoresTabelaIncerteza(ArrayValores);
+                AlterarArrependimentoIncerteza(ArrayValores);
 
-            decimal[,] ArrayValoresIncerteza = ObterArrayValoresIncerteza();
-            MelhorInvestimentoTabelaIncerteza(ArrayValoresIncerteza);
+                decimal[,] ArrayValoresIncerteza = ObterArrayValoresIncerteza();
+                MelhorInvestimentoTabelaIncerteza(ArrayValoresIncerteza);
 
-            decimal[,] MinimoArrependimentoIncerteza = ObterMatrizValoresMinimoArrependimentoIncerteza();
-            ColorirLinhaMinimoArrependimentoTabelaIncerteza(MinimoArrependimentoIncerteza);
+                decimal[,] MinimoArrependimentoIncerteza = ObterMatrizValoresMinimoArrependimentoIncerteza();
+                ColorirLinhaMinimoArrependimentoTabelaIncerteza(MinimoArrependimentoIncerteza);
+            }
 
 
+            if (MetodoAnalise == 2 || MetodoAnalise == 3) {
+                CalcularVME(ArrayValores);
+                CalcularPerdaEsperadaPonderada(ArrayValores);
+                decimal[] ArrayValoresRisco = ObterArrayValoresRisco();
+                MelhorInvestimentoRisco(ArrayValoresRisco);
+                CalcularVEIP();
+                decimal[,] MinimoArrependimentoRisco = ObterArrayMenorArrependimentoRisco();
+                int Posicao = CustoMedioOportunidade(MinimoArrependimentoRisco);
+                PintarMenorArrependimentoRisco(Posicao);
+
+            }
 
             // Métodos Relacionados a Análise de Risco
 
-            CalcularVME(ArrayValores);
-            CalcularPerdaEsperadaPonderada(ArrayValores);
-            decimal[] ArrayValoresRisco = ObterArrayValoresRisco();
-            MelhorInvestimentoRisco(ArrayValoresRisco);
-            CalcularVEIP();
-            decimal[,] MinimoArrependimentoRisco = ObterArrayMenorArrependimentoRisco();
-            int Posicao = CustoMedioOportunidade(MinimoArrependimentoRisco);
-            PintarMenorArrependimentoRisco(Posicao);
 
             dgvIncerteza.Refresh();
             dgvVMERisco.Refresh();
@@ -438,5 +455,6 @@ namespace AnaliseDecisao3.View {
         {
             pnlAnaliseRisco.Visible = pnlAnaliseRisco.Visible ? pnlAnaliseRisco.Visible = false : pnlAnaliseRisco.Visible = true;
         }
+
     }
 }
